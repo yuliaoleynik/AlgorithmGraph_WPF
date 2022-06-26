@@ -1,0 +1,28 @@
+﻿<Window x:Class="AlgorithmGraph.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:m="clr-namespace:AlgorithmGraph.Models"
+        xmlns:vm="clr-namespace:AlgorithmGraph.ViewModels"
+        xmlns:v="clr-namespace:AlgorithmGraph.Views"
+        Title="Пошук найкоротшого шляху" Height="610" Width="800"
+        Icon="image.png">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Templates.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <Style TargetType="FrameworkElement">
+                <Setter Property="Margin"
+                        Value="5" />
+                <Setter Property="Control.Padding"
+                        Value="5" />
+            </Style>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Window.DataContext>
+        <vm:MainViewModel />
+    </Window.DataContext>
+    <Window.Content>
+        <v:AdjacencyView1/>
+    </Window.Content>
+</Window>

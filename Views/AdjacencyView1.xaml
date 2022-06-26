@@ -1,0 +1,79 @@
+﻿<UserControl x:Class="AlgorithmGraph.Views.AdjacencyView1"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:AlgorithmGraph"
+      xmlns:dg2D="clr-namespace:DataGrid2DLibrary;assembly=DataGrid2DLibrary"
+      xmlns:m="clr-namespace:AlgorithmGraph.Models"
+      xmlns:vm="clr-namespace:AlgorithmGraph.ViewModels"
+      xmlns:v="clr-namespace:AlgorithmGraph.Views"
+      xmlns:ext="clr-namespace:WPFExtensions.Controls;assembly=WPFExtensions"
+      mc:Ignorable="d" 
+      d:DesignHeight="610" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Image x:Key="resourceImage" Source="reset.png"/>
+    </UserControl.Resources>
+    <Grid>
+        <ext:ZoomControl Margin="0,-1,2,1">
+            <m:GraphLayout Graph="{Binding Model}"
+                           LayoutAlgorithmType="CompoundFDP"
+                           OverlapRemovalAlgorithmType="FSA"
+                           HighlightAlgorithmType="Simple">
+            </m:GraphLayout>
+        </ext:ZoomControl>
+        <StackPanel Background="Snow" Orientation="Vertical"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top" Height="601" Width="180" Margin="0,-1,0,0">
+            <Label FontWeight="Medium" FontSize="13" HorizontalContentAlignment="Center" VerticalAlignment="Top" Content="Матриця суміжності" Margin="10,0" Height="37" />
+            <StackPanel  Orientation="Horizontal" Width="211" Height="25">
+                <Label VerticalContentAlignment="Bottom" HorizontalContentAlignment="Right" Content="Розмірність:" Width="116" Margin="0,1,0,0"/>
+                <ComboBox FontSize="11" SelectionChanged="ComboBox_SelectionChanged"  Width="52" Margin="1,5,0,2">
+                    <ComboBoxItem  Content="3"/>
+                    <ComboBoxItem Content="4"/>
+                    <ComboBoxItem Content="5"/>
+                    <ComboBoxItem Content="6"/>
+                    <ComboBoxItem Content="7"/>
+                    <ComboBoxItem Content="8"/>
+                    <ComboBoxItem Content="9"/>
+                    <ComboBoxItem Content="10"/>
+                </ComboBox>
+            </StackPanel>
+            <dg2D:DataGrid2D x:Name="matrix" ItemsSource2D="{Binding AdjacencyMatrix}" Height="159" Margin="8,0" />
+            <StackPanel Orientation="Horizontal" Height="48" Margin="0,0,4,0">
+                <Button Content="Зобразити"
+                    Command="{Binding UpdateGraphCommand}"  Height="22" Margin="60,3,30,20" Width="62"/>
+                <Button VerticalAlignment="Top" Margin="0,3" Click="Button_Click" Height="15">
+                    <Image Source="reset.png" Height="13" Width="16" RenderTransformOrigin="0.5,0.5">
+                        <Image.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform Angle="0.195"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Image.RenderTransform>
+                    </Image>
+                </Button>
+            </StackPanel>
+            <Separator  />
+            <TextBlock  VerticalAlignment="Center" HorizontalAlignment="Center" Height="33" Margin="18,20,3,0" Width="146"
+                        FontWeight="Medium" FontSize="13" TextWrapping="Wrap"><Run Text="     "/><Run Text="Методи пошуку"/><LineBreak/><Run Text="найкоротшого шляху"/>
+            </TextBlock>
+            <StackPanel Margin="0,15,0,20" Height="30">
+                <ComboBox Width="120" SelectionChanged="ComboBox_SelectionChanged_1">
+                    <ComboBoxItem Content="Дейкстри"/>
+                    <ComboBoxItem Content="Беллмана-Форда"/>
+                    <ComboBoxItem Content="Флойда-Воршелла"/>
+                </ComboBox>
+            </StackPanel>
+            <ScrollViewer  Height="99"
+              VerticalScrollBarVisibility="Visible" CanContentScroll="True"  Margin="8,0">
+                <TextBlock  Background="White" x:Name="textresult" TextWrapping="Wrap"><Run Text="Result"/></TextBlock>
+            </ScrollViewer>
+            <ScrollViewer Height="40" VerticalScrollBarVisibility="Visible" CanContentScroll="True" Margin="8,20">
+                <TextBlock  Background="White" x:Name="timeresult" TextWrapping="Wrap" ><Run Text="Time Result"/></TextBlock>
+            </ScrollViewer>
+        </StackPanel>
+    </Grid>
+</UserControl>
